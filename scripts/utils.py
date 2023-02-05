@@ -22,6 +22,12 @@ from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.feature_extraction.text import CountVectorizer
 from imblearn.over_sampling import SMOTE, ADASYN, BorderlineSMOTE, SVMSMOTE, RandomOverSampler
 from scipy import sparse
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import StackingClassifier
+from sklearn.ensemble import RandomForestClassifier 
 
 
 def sentiment(text):
@@ -110,6 +116,18 @@ def processing(data):
 def hyperparam_tune(clf, params,X_train,y_train,X_test,y_test):
     if clf == "lgbm":
         clf = LGBMClassifier(seed=42)
+    elif clf == "xgb":
+        clf = XGBClassifier()
+    elif clf == "lr":
+         clf =LogisticRegression()
+    elif clf == "svc":
+        clf = LinearSVC()
+    elif clf =="rf":
+        clf = RandomForestClassifier()
+    elif clf =="mlp":
+        clf= MLPClassifier()
+    elif clf =="gb":
+        clf = GradientBoostingClassifier
         
     search = GridSearchCV(clf,params,scoring='balanced_accuracy') #Handling imbalance, average of recall obtained on each class.
     search.fit(X=X_train, y=y_train)
