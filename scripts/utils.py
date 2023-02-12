@@ -28,6 +28,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import StackingClassifier
 from sklearn.ensemble import RandomForestClassifier 
+from sklearn.metrics import accuracy_score, roc_curve, auc
 
 
 def sentiment(text):
@@ -139,3 +140,7 @@ def hyperparam_tune(clf, params,X_train,y_train,X_test,y_test):
     report = classification_report(y_test, predicted)
     
     return best,accuracy,accuracy_b,f1,report, search
+
+
+
+
